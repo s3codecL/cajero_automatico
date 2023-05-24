@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero Automatico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+</head>
+
+<body><br><br><br>
+    
+    <hr>
+    <div><br>
+        <h2 class="text-bg-success p-xxl-2 text-center" role="alert">
+            <p class="text-center fs-2 fw-bold">Bienvenidos al Banco CityCode</h2>
+                <h5 class="text-bg-success p-xxl-1 text-center" role="alert">Somos parte de tu futuro</h5>
+                <h6 class="text-bg-success p-xxl-1 text-center" role="alert">s3codecL 2023 ©</h6><br>
+    </div>
+    <hr>
+    <script>
+        // usuarios
+        const clientes = [
+            { nombre: "Hakon Wium", identificador: "usuario1", clave: "123qweasd", saldo: 1000000 },
+            { nombre: "Brendan Eich", identificador: "usuario2", clave: "123qweasd", saldo: 2000000 },
+            { nombre: "Tim Berners", identificador: "usuario3", clave: "123qweasd", saldo: 3000000 },
+            { nombre: "Gustavo Andrade", identificador: "usuario4", clave: "123qweasd", saldo: 4000000 },
+            { nombre: "Guido van Rossum", identificador: "usuario5", clave: "123qweasd", saldo: 5000000 },
+            { nombre: "Linus Torvalds", identificador: "usuario6", clave: "123qweasd", saldo: 6000000 },
+            { nombre: "Bill Gates", identificador: "usuario7", clave: "123qweasd", saldo: 7000000 }
+        ];
+
+        // ingrese credenciales
+        const identificador = prompt("Ingrese su identificador:");
+        const clave = prompt("Ingresa tu clave:");
+
+        // Buscar usuario validar datos
+        let clienteEncontrado = false;
+        let cliente;
+        for (let i = 0; i < clientes.length; i++) {
+            if (clientes[i].identificador === identificador && clientes[i].clave === clave) {
+                clienteEncontrado = true;
+                cliente = clientes[i];
+            }
+        }
+
+        if (clienteEncontrado) {
+            alert(`Bienvenido(a) ${cliente.nombre}`);
+
+
+            // Mostrar menú y seleccione una opción
+            let opcion;
+            while (opcion !== "4") {
+                opcion = prompt("Seleccione una opción:\n1. Depositar\n2. Girar\n3. Ver saldo\n4. Salir");
+
+                switch (opcion) {
+                    case "1":
+                        const cantidadDeposito = Number(prompt("Ingrese el monto que desea depositar"));
+                        depositar(cantidadDeposito);
+                        break;
+                    case "2":
+                        const cantidadGiro = Number(prompt(`Ingrese el monto que desea girar su saldo actual es ${cliente.saldo}`));
+                        girar(cantidadGiro);
+                        break;
+                    case "3":
+                        alert(`Su saldo actual es de ${cliente.saldo}`);
+                        break;
+                    case "4":
+                        alert("Gracias por usar nuestro servicio");
+                        break;
+                    default:
+                        alert("Opción inválida");
+                }
+            }
+        } else {
+            // error si el cliente no se encuentra
+            alert("Error: Identificador o clave inválidos, hasta luego!");
+        }
+        
+        //realizar depósito
+        function depositar(cantidad) {
+            cliente.saldo += cantidad;
+            alert(`Deposito realizado, su saldo actual es de ${cliente.saldo}`);
+        }
+
+        // realizar giro
+        function girar(cantidad) {
+            if (cantidad <= cliente.saldo) {
+                cliente.saldo -= cantidad;
+                alert(`Giro realizado, Su saldo actual es de ${cliente.saldo}`);
+            } else {
+                alert("Saldo insuficiente, intente otro monto");
+            }
+        }
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
